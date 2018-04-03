@@ -45,7 +45,7 @@ public class ArrayList<E> {
 
     }
 
-    public void ensureCapacity(int minCapacity){
+    private void ensureCapacity(int minCapacity){
         int minExpand = (elementData.length !=0) ? 0 : DEFAULT_CAPACITY;
         if(minCapacity > minExpand){
             ensureCapacityInternal(minCapacity);
@@ -92,6 +92,13 @@ public class ArrayList<E> {
         return (minCapacity > MAX_ARRAY_SIZE)? Integer.MAX_VALUE : MAX_ARRAY_SIZE;
     }
 
+    private void rangeCheckForAdd(int index){
+        if(index < 0 || index > size){
+            throw new ArrayIndexOutOfBoundsException("Illegal index :"+ index);
+        }
+
+    }
+
     /**
      * 增
      * @param e the element to be added
@@ -113,7 +120,7 @@ public class ArrayList<E> {
     }
 
     public boolean addAll(int index,Collection<? extends E> c){
-        rangeIndexCheck(index);
+        rangeCheckForAdd(index);
         Object[] a = c.toArray();
         int numNew = a.length;
         ensureCapacityInternal(size + numNew);
@@ -136,9 +143,10 @@ public class ArrayList<E> {
         size = size + numNew;
         return numNew != 0;
     }
-
-    public void rangeIndexCheck(int index){
-        if(index < 0 || index > size){
+    //there's no need to check if the index is negative,ArrayIndexOutOfBoundsException will be thrown
+    //when array access is to be used.
+    private void rangeIndexCheck(int index){
+        if(index >= size){
             throw new ArrayIndexOutOfBoundsException();
         }
     }
@@ -148,15 +156,43 @@ public class ArrayList<E> {
      */
 
     public void clear(){
-
-
+        for(int i = 0;i < size;i++){
+            elementData[i] = null;
+        }
+        size = 0;
     }
 
     public void remove(int index){
-
+        rangeIndexCheck(index);
+        int numMoved = size - index -1;
+        System.arraycopy(elementData,index + 1,elementData,index ,numMoved);
+        elementData[--size] = null;
     }
 
-    public void remove(Object o){
+    public boolean remove(Object o){
+        if(o == null){
+            for(int i = 0;i <= size;i++){
+                if(elementData[i] == null){
+                    fastMove(i);
+                    return true;
+                }
+            }
+        }
+        if(o != null){
+            for(int i = 0;i <= size;i++){
+                if(o.equals(elementData[i])){
+                    fastMove(i);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void fastMove(int index){
+        int numMoved = size -index - 1;
+        System.arraycopy(elementData,index + 1,elementData,index ,numMoved);
+        elementData[--size] = null;
 
     }
 
@@ -180,8 +216,21 @@ public class ArrayList<E> {
      */
 
     public boolean contains(Object o){
-
-        return true;
+        if(o == null){
+            for(int i = 0;i < size;i++){
+                if(elementData[i] == null){
+                    return true;
+                }
+            }
+        }
+        if(o != null){
+            for(int i = 0;i < size;i++){
+                if(elementData[i].equals(o)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     //public E get(int index){
