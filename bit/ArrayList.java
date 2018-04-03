@@ -45,26 +45,102 @@ public class ArrayList<E> {
 
     }
 
+    public void ensureCapacity(int minCapacity){
+        int minExpand = (elementData.length !=0) ? 0 : DEFAULT_CAPACITY;
+        if(minCapacity > minExpand){
+            ensureCapacityInternal(minCapacity);
+        }
+
+    }
+
+    private void ensureCapacityInternal(int minCapacity){
+        ensureExplicitCapacity(calculateCapacity(elementData,minCapacity));
+    }
+
+    private void ensureExplicitCapacity(int minCapacity){
+        if(minCapacity > elementData.length){
+            grow(minCapacity);
+        }
+    }
+
+    private static int calculateCapacity(Object[] elementData,int minCapacity){
+        if(elementData == DEFAULT_CAPACITY__ELEMENTDATA){
+            return Math.max(elementData.length,minCapacity);
+        }
+        return minCapacity;
+    }
+
+    private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
+
+    private void grow(int minCapacity){
+        int oldCapacity = elementData.length;
+        int newCapacity = oldCapacity + (oldCapacity >> 1);
+        if(minCapacity - newCapacity > 0){
+            newCapacity = minCapacity;
+        }
+        if(newCapacity - MAX_ARRAY_SIZE > 0){
+            newCapacity = hugeCapacity(minCapacity);
+        }
+        elementData = Arrays.copyOf(elementData,newCapacity);
+
+    }
+
+    private static int hugeCapacity(int minCapacity){
+        if(minCapacity < 0){
+            throw new OutOfMemoryError();
+        }
+        return (minCapacity > MAX_ARRAY_SIZE)? Integer.MAX_VALUE : MAX_ARRAY_SIZE;
+    }
+
     /**
      * 增
-     * @param elementData the element to be added
+     * @param e the element to be added
      */
-    public boolean add(E elementData){
-
-        return flag;
-
-    }
-
-    public void add(int index ,E elementData){
+    public boolean add(E e){
+        ensureCapacity(size + 1);
+        elementData[size++] = e;
+        return true;
 
     }
 
-    public void addAll(int index,Collection<? extends E> c){
+    public void add(int index ,E e){
+        rangeIndexCheck(index);
+        ensureCapacity(size+1);
+        System.arraycopy(elementData,index,elementData,index+1,size -index);
+        elementData[index] = e;
+        size++;
 
     }
 
-    public void addAll(Collection<? extends  E> c){
+    public boolean addAll(int index,Collection<? extends E> c){
+        rangeIndexCheck(index);
+        Object[] a = c.toArray();
+        int numNew = a.length;
+        ensureCapacityInternal(size + numNew);
+        int numMoved = size -index;
+        if(numMoved > 0){
+            System.arraycopy(elementData,index,elementData,index + numNew,numMoved);
+        }
+        System.arraycopy(a,0,elementData,index,numNew);
+        size = size +numNew;
+        return  numNew != 0;
 
+    }
+
+    public boolean addAll(Collection<? extends  E> c){
+        Object[] a = c.toArray();
+        int numNew = a.length;
+        int newCapacity = size + numNew;
+        ensureCapacityInternal(newCapacity);
+        System.arraycopy(a,0,elementData,size,numNew);
+        size = size + numNew;
+        return numNew != 0;
+    }
+
+    public void rangeIndexCheck(int index){
+        if(index < 0 || index > size){
+            throw new ArrayIndexOutOfBoundsException();
+        }
     }
 
     /**
@@ -72,6 +148,7 @@ public class ArrayList<E> {
      */
 
     public void clear(){
+
 
     }
 
@@ -124,7 +201,7 @@ public class ArrayList<E> {
 
     public boolean isEmpty(){
 
-        return flag;
+        return (size == 0);
     }
 
     public int size(){

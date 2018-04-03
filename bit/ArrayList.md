@@ -28,3 +28,23 @@
  
 ### serialize：
 
+### ArrayList初始容量
+- [https://blog.csdn.net/jdsjlzx/article/details/52675726]
+
+### modCount:  
+迭代器在遍历时做线程检查,继承自AbstractList中`protected transient int modCount = 0;`
+
+<p>
+
+      *This field is used by the iterator and list iterator implementation  
+      * returned by the {@code iterator} and {@code listIterator} methods.
+      * If the value of this field changes unexpectedly, the iterator (or list
+      * iterator) will throw a {@code ConcurrentModificationException} in
+      * response to the {@code next}, {@code remove}, {@code previous},
+      * {@code set} or {@code add} operations.  This provides
+      * <i>fail-fast</i> behavior, rather than non-deterministic behavior in
+      *the face of concurrent modification during iteration.
+</p>
+
+[www.zhihu.com/question/24086463?sort=created]
+
