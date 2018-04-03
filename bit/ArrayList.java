@@ -162,11 +162,13 @@ public class ArrayList<E> {
         size = 0;
     }
 
-    public void remove(int index){
+    public E remove(int index){
         rangeIndexCheck(index);
+        E removedValue = elementData(index);
         int numMoved = size - index -1;
         System.arraycopy(elementData,index + 1,elementData,index ,numMoved);
         elementData[--size] = null;
+        return removedValue;
     }
 
     public boolean remove(Object o){
@@ -199,16 +201,35 @@ public class ArrayList<E> {
     public void batchRemove(Object o){
 
     }
-
+    //左闭右开区间[fromIndex,toIndex)
     public void removeRange(int fromIndex,int toIndex){
+        int numRomved = size - toIndex;
+
+        System.arraycopy(elementData,toIndex ,elementData,fromIndex,numRomved);
+
+        int newSize = size - (toIndex - fromIndex);
+
+        for(int i = newSize;i < size; i++){
+                elementData[i] = null;
+        }
+        size = newSize;
 
     }
 
     /**
      * 改
      */
-    public void set(int index,E elementData){
+    public E set(int index,E element){
+        rangeIndexCheck(index);
 
+        E oldValue = elementData(index);
+        elementData[index] = element;
+        return oldValue;
+    }
+
+    public E elementData(int index){
+        rangeIndexCheck(index);
+        return (E) elementData[index];
     }
 
     /**
