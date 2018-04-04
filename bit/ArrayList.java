@@ -197,8 +197,12 @@ public class ArrayList<E> {
         elementData[--size] = null;
 
     }
-
+    //批量删除
     public void batchRemove(Object o){
+
+    }
+
+    public void retainAll(Collection<? extends  E> c){
 
     }
     //左闭右开区间[fromIndex,toIndex)
@@ -259,14 +263,39 @@ public class ArrayList<E> {
     //  return 0;
     //}
 
-    public boolean indexOf(Object o){
+    public int indexOf(Object o){
+        if(o == null){
+            for(int i = 0;i < size;i++){
+                if(elementData[i] == null){
+                    return i;
+                }
+            }
+        } else{
+            for(int i = 0;i < size;i++){
+                if(o.equals(elementData[i])){
+                    return i;
+                }
+            }
+        }
 
-        return true;
+        return -1;
     }
 
     public int lastIndexOf(Object o){
-
-        return 0;
+        if(o == null){
+            for(int i = size -1;i >=0;i--){
+                if(elementData[i] == null){
+                    return i;
+                }
+            }
+        } else{
+            for(int i = size - 1;i >=0;i--){
+                if(o.equals(elementData[i])){
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
     public boolean isEmpty(){
@@ -276,6 +305,10 @@ public class ArrayList<E> {
 
     public int size(){
         return size;
+    }
+
+    public void trimToSize(){
+        }
     }
 
 
