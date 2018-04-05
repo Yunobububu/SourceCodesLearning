@@ -9,3 +9,7 @@
 * command + shift + K push
 
 参考链接：[https://www.cnblogs.com/zhangpengshou/p/5366413.html]
+
+### 自定义快捷键  
+Preferences -> keymap -> Main menu -> File -> New -> class  
+![]()

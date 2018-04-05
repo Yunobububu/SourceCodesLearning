@@ -308,7 +308,14 @@ public class ArrayList<E> {
     }
 
     public void trimToSize(){
+        if(size < elementData.length){
+            elementData = (size == 0) ? EMPTY_ELELMENTDATA :
+                    Arrays.copyOf(elementData,size);
         }
+    }
+
+    public Object[] toArray(){
+        return Arrays.copyOf(elementData,size);
     }
 
 
