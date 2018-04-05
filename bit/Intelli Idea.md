@@ -20,6 +20,6 @@ Preferences -> keymap -> Main menu -> File -> New -> class
 
 <div align ="center">
 
-<img src = "https://raw.githubusercontent.com/Yunobububu/Pictures/master/Screenshot/KeyMap.png" height="160" wigth="90">
+<img src = "https://raw.githubusercontent.com/Yunobububu/Pictures/master/Screenshot/KeyMap.png" height="240" wigth="135">
 
 </div>
