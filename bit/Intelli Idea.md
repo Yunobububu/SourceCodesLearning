@@ -11,5 +11,15 @@
 参考链接：[https://www.cnblogs.com/zhangpengshou/p/5366413.html]
 
 ### 自定义快捷键  
-Preferences -> keymap -> Main menu -> File -> New -> class  
-![]()
+Preferences -> keymap -> Main menu -> File -> New -> class 
+<div align="center">
+
+<img src = "https://raw.githubusercontent.com/Yunobububu/Pictures/master/Screenshot/MacPreference.png" >
+
+</div> 
+
+<div align ="center">
+
+<img src = "https://raw.githubusercontent.com/Yunobububu/Pictures/master/Screenshot/KeyMap.png" >
+
+</div>
