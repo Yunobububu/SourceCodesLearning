@@ -7,6 +7,10 @@
 * ctrl + R run 
 * command + K commit
 * command + shift + K push
+* Alter + Enter 自动接口重写方法
+* Alter + Enter 调用Junits
+* Ctrl + shift + R run Test
+
 
 参考链接：[https://www.cnblogs.com/zhangpengshou/p/5366413.html]
 
@@ -14,12 +18,12 @@
 Preferences -> keymap -> Main menu -> File -> New -> class 
 <div align="center">
 
-<img src = "https://raw.githubusercontent.com/Yunobububu/Pictures/master/Screenshot/MacPreference.png" >
+<img src = "https://raw.githubusercontent.com/Yunobububu/DesignPattern/master/src/Pictures/MacPreference.png" >
 
 </div> 
 
 <div align ="center">
 
-<img src = "https://raw.githubusercontent.com/Yunobububu/Pictures/master/Screenshot/KeyMap.png" >
+<img src = "https://raw.githubusercontent.com/Yunobububu/DesignPattern/master/src/Pictures/KeyMap.png" >
 
 </div>
